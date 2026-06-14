@@ -35,11 +35,25 @@ def find_value(text, patterns):
     return None
 
 
+def calculate_bmi(height_cm, weight_kg):
+    """
+    Calculates BMI from height (cm) and weight (kg).
+    Formula: BMI = weight(kg) / (height(m))^2
+    Returns None if either value is missing.
+    """
+    if height_cm is None or weight_kg is None:
+        return None
+    height_m = height_cm / 100
+    return round(weight_kg / (height_m ** 2), 1)
+
+
 def extract_biomarkers(pdf_path):
     """
     Main function. Takes a PDF file path.
     Returns a dictionary of all biomarker values found.
     If a value is not found, it returns None for that key.
+    If BMI is not directly found but height + weight are present,
+    BMI is calculated automatically.
     """
     text = extract_text_from_pdf(pdf_path)
 
@@ -103,7 +117,23 @@ def extract_biomarkers(pdf_path):
             r"bmi[\s:=\-]*(\d+\.?\d*)",
             r"body\s*mass\s*index[\s:=\-]*(\d+\.?\d*)",
         ]),
+
+        "height_cm": find_value(text, [
+            r"height[\s:=\-]*(\d+\.?\d*)\s*cm",
+            r"ht[\s:=\-]*(\d+\.?\d*)\s*cm",
+        ]),
+
+        "weight_kg": find_value(text, [
+            r"weight[\s:=\-]*(\d+\.?\d*)\s*kg",
+            r"wt[\s:=\-]*(\d+\.?\d*)\s*kg",
+        ]),
     }
+
+    # If BMI wasn't found directly, try calculating it from height + weight
+    if biomarkers["bmi"] is None:
+        biomarkers["bmi"] = calculate_bmi(
+            biomarkers["height_cm"], biomarkers["weight_kg"]
+        )
 
     return biomarkers
 
