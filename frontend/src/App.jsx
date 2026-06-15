@@ -1,11 +1,16 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import EntryScreen from "./screens/EntryScreen";
+import AboutScreen from "./screens/AboutScreen";
+
 function App() {
   return (
-    <div className="min-h-screen bg-indigo-100 flex items-center justify-center">
-      <h1 className="text-4xl font-bold text-indigo-600">
-        Heartica is working with Tailwind!
-      </h1>
-    </div>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<EntryScreen />} />
+        <Route path="/about" element={<AboutScreen />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
