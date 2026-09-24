@@ -1,13 +1,17 @@
+import os
 import pymysql
-
+from dotenv import load_dotenv
+load_dotenv()
 def get_connection():
-    return pymysql.connect(
-        host="127.0.0.1",
-        user="root",
-        password="aarohi123",
-        database="heartica",
-        cursorclass=pymysql.cursors.DictCursor
-    )
+ return pymysql.connect(
+ host=os.getenv("DB_HOST", "127.0.0.1"),
+ port=int(os.getenv("DB_PORT", "3306")),
+ user=os.getenv("DB_USER", "root"),
+ password=os.getenv("DB_PASSWORD", ""),
+ database=os.getenv("DB_NAME", "heartica"),
+ cursorclass=pymysql.cursors.DictCursor
+ )
+
 
 def save_assessment(data):
     conn = get_connection()

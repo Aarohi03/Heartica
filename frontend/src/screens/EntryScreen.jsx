@@ -1,23 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { ArrowRight, Upload, ShieldCheck, Info } from "lucide-react";
-
-// Heart + ECG pulse logo SVG (placeholder until real logo provided)
-function HeartLogo() {
-  return (
-    <svg width="38" height="38" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="44" height="44" rx="12" fill="#EEF2FF"/>
-      <path
-        d="M22 32s-9-6.5-9-13a6 6 0 0 1 9-5.2A6 6 0 0 1 31 19c0 6.5-9 13-9 13z"
-        fill="#6366F1" opacity="0.15"
-        stroke="#6366F1" strokeWidth="1.5"
-      />
-      <polyline
-        points="13,22 16,22 18,17 20,27 22,22 24,22 26,19 28,22 31,22"
-        fill="none" stroke="#6366F1" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
+import { ArrowRight, Upload, ShieldCheck } from "lucide-react";
+import Navbar from "../components/Navbar";
 
 // Single smooth wave band at bottom
 function WaveBackground() {
@@ -99,23 +82,7 @@ export default function EntryScreen() {
     >
       <WaveBackground />
 
-      {/* Navbar */}
-      <nav className="relative z-10 flex items-center justify-between px-6 md:px-12 py-4 flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <HeartLogo />
-          <div>
-            <div className="font-bold text-gray-900 text-base leading-tight">Heartica</div>
-            <div className="text-xs text-gray-500 leading-tight">AI Heart Risk Assessment</div>
-          </div>
-        </div>
-        <button
-          onClick={() => navigate('/about')}
-          className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-indigo-600 transition-colors"
-        >
-          <Info size={16}/>
-          <span>About Heartica</span>
-        </button>
-      </nav>
+      <Navbar />
 
       {/* Main content - flex-grow to fill remaining space, justify-center to balance */}
       <div className="relative z-10 flex-1 flex flex-col justify-center px-6 min-h-0">

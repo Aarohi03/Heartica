@@ -1,3 +1,6 @@
 venv/
 __pycache__/
-uploads/*.pdf
+uploads/*
+!uploads/.gitkeep
+*.pkl
+.env

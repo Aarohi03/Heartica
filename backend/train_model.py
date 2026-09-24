@@ -13,7 +13,10 @@ import os
 
 # ── 1. Load the dataset ───────────────────────────────────────────────
 print("Loading dataset...")
-df = pd.read_csv("heartica_dataset.csv")
+df1 = pd.read_csv("heartica_dataset.csv")   # old dataset
+df2 = pd.read_csv("indian_cardiovascular_dataset.csv")         # new dataset
+df = pd.concat([df1, df2], ignore_index=True)
+print(f"Combined dataset size: {len(df)} rows")
 print(f"Dataset shape: {df.shape}")
 print(f"Columns: {list(df.columns)}")
 print(f"\nFirst 3 rows:\n{df.head(3)}")

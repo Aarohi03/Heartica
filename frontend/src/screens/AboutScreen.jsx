@@ -1,11 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Heart, Brain, Activity, ShieldCheck } from "lucide-react";
-
+import Navbar from "../components/Navbar";
 export default function AboutScreen() {
   const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-[#F8F9FF]" style={{ fontFamily: 'Inter, sans-serif' }}>
+      <Navbar />
       <div className="max-w-3xl mx-auto px-6 py-10">
 
         <button
