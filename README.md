@@ -147,7 +147,7 @@ If your risk score is High — please see a doctor as soon as possible. Do not r
 
 ## Contact
 
-Built by **Aarohi Mathur**, B.Tech IT Student, SKIT Jaipur
+ Built by Aarohi Mathur with ❤️ as a final year academic project. This tool is intended for educational purposes only and is not a certified medical device. Always consult a qualified healthcare professional for medical advice.
 
 📧 aarohi03mathur@gmail.com
 🔗 [GitHub](https://github.com/Aarohi03/Heartica)
