@@ -34,12 +34,12 @@ def save_assessment(data):
     """
 
     values = (
-        data["age"], data["sex"], data["smoking"], data["family_history"],
-        data["total_cholesterol"], data["ldl"], data["hdl"], data["triglycerides"],
-        data["systolic_bp"], data["diastolic_bp"], data["glucose"], data["hba1c"], data["bmi"],
-        data["xgboost_risk"], data["framingham_risk"], data["final_risk"],
-        "\n".join(data["insights"]), "\n".join(data["recommendations"])
-    )
+    data.get("age"), data.get("sex"), data.get("smoking"), data.get("family_history"),
+    data.get("total_cholesterol"), data.get("ldl"), data.get("hdl"), data.get("triglycerides"),
+    data.get("systolic_bp"), data.get("diastolic_bp"), data.get("glucose"), data.get("hba1c"), data.get("bmi"),
+    data.get("xgboost_risk"), data.get("framingham_risk"), data.get("final_risk"),
+    "\n".join(data.get("insights", [])), "\n".join(data.get("recommendations", []))
+)
 
     cursor.execute(sql, values)
     conn.commit()
