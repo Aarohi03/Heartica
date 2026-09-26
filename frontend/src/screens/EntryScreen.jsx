@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { ArrowRight, Upload, ShieldCheck } from "lucide-react";
 import Navbar from "../components/Navbar";
 
@@ -74,6 +75,7 @@ function ClipboardIllustration() {
 
 export default function EntryScreen() {
   const navigate = useNavigate();
+  const [activeModal, setActiveModal] = useState(null);
 
   return (
     <div
@@ -179,13 +181,123 @@ export default function EntryScreen() {
         </div>
         <p className="text-gray-400 text-xs text-center mb-1">© 2026 Heartica. All rights reserved.</p>
         <div className="flex items-center justify-center gap-3 text-xs text-indigo-400">
-          <a href="#" className="hover:underline">Privacy Policy</a>
-          <span className="text-gray-300">·</span>
-          <a href="#" className="hover:underline">Terms of Use</a>
-          <span className="text-gray-300">·</span>
-          <a href="#" className="hover:underline">Contact Us</a>
-        </div>
+  <button
+    type="button"
+    onClick={() => setActiveModal("privacy")}
+    className="hover:underline"
+  >
+    Privacy Policy
+  </button>
+
+  <span className="text-gray-300">·</span>
+
+  <button
+    type="button"
+    onClick={() => setActiveModal("terms")}
+    className="hover:underline"
+  >
+    Terms of Use
+  </button>
+
+  <span className="text-gray-300">·</span>
+
+  <button
+    type="button"
+    onClick={() => setActiveModal("contact")}
+    className="hover:underline"
+  >
+    Contact Us
+  </button>
+</div>
       </div>
+
+      {activeModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 px-4"
+          onClick={() => setActiveModal(null)}
+        >
+          <div
+            className="relative w-full max-w-[480px] rounded-2xl bg-white p-6 shadow-lg"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setActiveModal(null)}
+              className="absolute right-4 top-3 text-2xl leading-none text-gray-400 hover:text-gray-700"
+              aria-label="Close"
+            >
+              ×
+            </button>
+
+            <h2 className="mb-4 pr-8 text-xl font-bold text-indigo-500">
+              {activeModal === "privacy" && "Privacy Policy"}
+              {activeModal === "terms" && "Terms of Use"}
+              {activeModal === "contact" && "Contact Us"}
+            </h2>
+
+            <div className="text-sm leading-relaxed text-gray-600">
+              {activeModal === "privacy" && (
+                <p>
+                  Heartica does not collect any personally identifiable
+                  information. We do not ask for your name, Aadhaar, phone
+                  number, or email address. Your uploaded PDF files are
+                  deleted immediately after processing. Your health values
+                  are stored only to generate your risk report and are not
+                  shared with any third party. By using Heartica you agree
+                  to this privacy policy.
+                </p>
+              )}
+
+              {activeModal === "terms" && (
+                <p>
+                  Heartica is an AI-based cardiovascular risk estimation
+                  tool built as a final year academic project. It is not a
+                  certified medical device and does not provide medical
+                  diagnosis. All risk scores are estimates based on
+                  statistical models. Heartica is not a substitute for
+                  professional medical advice. Always consult a qualified
+                  doctor before making health decisions. Use of this tool
+                  is entirely at your own discretion.
+                </p>
+              )}
+
+              {activeModal === "contact" && (
+                <div className="space-y-2">
+                  <p>
+                    For feedback, bug reports, or queries:
+                  </p>
+
+                  <p>
+                    Email:{" "}
+                    <a
+                      href="mailto:aarohi03mathur@gmail.com"
+                      className="text-indigo-500 hover:underline"
+                    >
+                      aarohi03mathur@gmail.com
+                    </a>
+                  </p>
+
+                  <p>
+                    GitHub:{" "}
+                    <a
+                      href="https://github.com/Aarohi03/Heartica"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-indigo-500 hover:underline"
+                    >
+                      github.com/Aarohi03/Heartica
+                    </a>
+                  </p>
+
+                  <p>
+                    Built by Aarohi Mathur with ❤️ as a final year academic project. This tool is intended for educational purposes only and is not a certified medical device. Always consult a qualified healthcare professional for medical advice.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );
